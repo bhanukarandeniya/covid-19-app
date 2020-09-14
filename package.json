@@ -1,0 +1,23 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "Sample application to track covid 19",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhanukarandeniya/covid-19-app.git"
+  },
+  "author": "Bhanuka Randeniya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhanukarandeniya/covid-19-app/issues"
+  },
+  "homepage": "https://github.com/bhanukarandeniya/covid-19-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
