@@ -27,6 +27,7 @@ db.Distric = require('./distric')(sequelize);
 db.Distric.hasMany(db.Person, {
     foreignKey: 'person_distric'
 });
+
 db.Distric.hasMany(db.CovidIncident, {
     foreignKey: 'covid_distric'
 });

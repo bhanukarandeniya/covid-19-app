@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    const CovidIncident = sequelize.define('covid-incident',{
+    return CovidIncident.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
         address: { type: DataTypes.STRING, allowNull: false },
         city: { type: DataTypes.STRING, allowNull: false },
         discription: { type: DataTypes.STRING, allowNull: false }
-    });
-    return CovidIncident;
+    }, {
+        sequelize,
+        modelName: 'covid_incident'
+    })
 }
+
+class CovidIncident extends Model { }

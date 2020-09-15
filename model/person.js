@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 
 module.exports = (sequelize) => {
-    const Person = sequelize.define('person',{
+    return Person.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -18,7 +18,11 @@ module.exports = (sequelize) => {
         occupation: { type: DataTypes.STRING },
         infection_status: { type: DataTypes.STRING, allowNull: false },
         description: { type: DataTypes.TEXT, allowNull: false }
+    }, {
+        sequelize,
+        modelName: 'person'
     });
-    return Person;
 }
+
+class Person extends Model { }
 
