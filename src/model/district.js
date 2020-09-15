@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         code: { type: DataTypes.SMALLINT, allowNull: false },
     }, {
         sequelize,
-        modelName: 'distric'
+        modelName: 'district'
     });
 }
 
