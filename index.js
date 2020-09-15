@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 })
 
-db.sequelize.sync({ force: true }).then(result => {
+db.sequelize.sync().then(result => {
     // console.log(result);
 }).catch(err => {
     console.log(err);
@@ -16,3 +16,7 @@ db.sequelize.sync({ force: true }).then(result => {
 app.listen(9000, () => {
     console.log('Sample app listening on port 9000!');
 });
+
+
+
+
