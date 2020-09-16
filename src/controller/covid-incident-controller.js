@@ -22,7 +22,25 @@ const create = (req, res) => {
  *      '200':
  *        description: A successful response
  */
-const findAll = (req, res) => {
+const findAll = async (req, res) => {
+    const page = req.query.page;
+    const limit = parseInt(req.query.size);
+    const offset = page * limit;
+    console.log(limit, offset);
+    try {
+        let data = await CovidIncident.findAll({
+            limit,
+            offset,
+            where: {}
+        });
+        if (data != null && data != undefined) {
+            return res.send(data);
+        }
+    } catch (error) {
+        return res.status(500).send({
+            message: "Error retrieving Covid Incidents..."
+        });
+    }
 
 };
 
@@ -35,21 +53,20 @@ const findAll = (req, res) => {
  *      '200':
  *        description: A successful response
  */
-const findOne = (req, res) => {
+const findOne = async (req, res) => {
     const id = req.params.id;
-    CovidIncident.findByPk(id)
-        .then(data => {
-            if (data != null && data != undefined) {
-                res.send(data);
-            }
-            res.send(`No data available for the given id = ${id}`);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Covid Incident with id=" + id
-            });
+    try {
+        let data = await CovidIncident.findByPk(id);
+        if (data != null && data != undefined) {
+            return res.send(data);
+        }
+    } catch (error) {
+        return res.status(500).send({
+            message: "Error retrieving Covid Incident with id=" + id
         });
-};
+    }
+    res.send(`No data available for the given id = ${id}`);
+}
 
 /**
  * @swagger
