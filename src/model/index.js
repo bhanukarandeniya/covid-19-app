@@ -24,16 +24,20 @@ db.CovidIncident = require('./covid-incident')(sequelize);
 db.District = require('./district')(sequelize);
 
 db.District.hasMany(db.Person, {
-    foreignKey: 'person_district'
+    foreignKey: 'person_district',
+    allowNull: false
 });
 db.Person.belongsTo(db.District, {
-    foreignKey: 'person_district'
+    foreignKey: 'person_district',
+    allowNull: false
 });
 db.District.hasMany(db.CovidIncident, {
-    foreignKey: 'covid_district'
+    foreignKey: 'covid_district',
+    allowNull: false
 });
 db.CovidIncident.belongsTo(db.District, {
-    foreignKey: 'covid_district'
+    foreignKey: 'covid_district',
+    allowNull: false
 })
 
 module.exports = db

@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require('sequelize');
 
 module.exports = (sequelize) => {
-    return Distric.init({
+    return District.init({
         id: {
             type: DataTypes.SMALLINT,
             primaryKey: true,
@@ -15,4 +15,4 @@ module.exports = (sequelize) => {
     });
 }
 
-class Distric extends Model { }
+class District extends Model { }

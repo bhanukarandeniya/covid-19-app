@@ -14,5 +14,8 @@
             "acquire": 30000,
             "idle": 10000
         }
+    },
+    "CORS": {
+        "origin": "http://localhost:8081"
     }
 }

@@ -14,10 +14,10 @@ const swaggerOptions = {
             servers: [`localhost:${config.port}`]
         }
     },
-    apis: ["app.js"]
+    apis: ["./src/controller/*.js"]
 }
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-exports.swaggerUi = swaggerUi;
-exports.swaggerDocs = swaggerDocs;
+
+module.exports = { swaggerDocs, swaggerUi }
