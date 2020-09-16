@@ -26,22 +26,18 @@ const findAll = async (req, res) => {
     const page = req.query.page;
     const limit = parseInt(req.query.size);
     const offset = page * limit;
-    console.log(limit, offset);
     try {
         let data = await CovidIncident.findAll({
             limit,
             offset,
             where: {}
         });
-        if (data != null && data != undefined) {
-            return res.send(data);
-        }
+        return res.status(200).send(data);
     } catch (error) {
         return res.status(500).send({
             message: "Error retrieving Covid Incidents..."
         });
     }
-
 };
 
 /**
