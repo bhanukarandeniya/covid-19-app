@@ -11,7 +11,8 @@ module.exports = (sequelize) => {
         location: { type: DataTypes.STRING, allowNull: false },
         address: { type: DataTypes.STRING, allowNull: false },
         city: { type: DataTypes.STRING, allowNull: false },
-        discription: { type: DataTypes.TEXT, allowNull: false }
+        discription: { type: DataTypes.TEXT, allowNull: false },
+        active_record: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
     }, {
         sequelize,
         modelName: 'covid_incident'

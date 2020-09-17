@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { create, findOne, findAll, update } = require('../controller/covid-incident-controller');
+const { create, findOne, findAll, update, remove } = require('../controller/covid-incident-controller');
 const personController = require('../controller/person-controller');
 
 
@@ -11,6 +11,8 @@ router.get('/all-covid-incidents', findAll);
 
 router.post('/covid-incidents', create);
 
-router.put('/covid-incidents/:id', update);
+router.put('/covid-incidents', update);
+
+router.delete('/covid-incidents/:id', remove);
 
 module.exports = router;

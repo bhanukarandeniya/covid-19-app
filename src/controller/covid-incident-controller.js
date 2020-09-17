@@ -1,4 +1,4 @@
-const { CovidIncident } = require("../model");
+const { CovidIncident } = require("../model/index");
 
 /**
  * @swagger
@@ -9,8 +9,25 @@ const { CovidIncident } = require("../model");
  *      '200':
  *        description: A successful response
  */
-const create = (req, res) => {
-    res.send('Hello World!');
+const create = async (req, res) => {
+    const covid_incident = {
+        date: req.body.date,
+        location: req.body.location,
+        address: req.body.address,
+        city: req.body.city,
+        discription: req.body.discription,
+        covid_district: req.body.covid_district
+    }
+    try {
+        let data = await CovidIncident.create(covid_incident);
+        if (data) {
+            return res.status(200).send(data.dataValues);
+        }
+    } catch (error) {
+        return res.status(500).send({
+            message: "Error saving covid incident..."
+        });
+    }
 }
 
 /**
@@ -28,9 +45,9 @@ const findAll = async (req, res) => {
     const offset = page * limit;
     try {
         let data = await CovidIncident.findAll({
-            limit,
-            offset,
-            where: {}
+            limit: limit,
+            offset: offset,
+            where: { active_record: true }
         });
         return res.status(200).send(data);
     } catch (error) {
@@ -73,8 +90,64 @@ const findOne = async (req, res) => {
  *      '200':
  *        description: A successful response
  */
-const update = (req, res) => {
+const update = async (req, res) => {
+    const id = req.body.id;
+    const covid_incident = getCovidIncident(req)
+    try {
+        let data = await CovidIncident.update(covid_incident, {
+            where: { id: id }
+        });
+        if (data) {
+            return res.send(data);
+        }
+    } catch (error) {
+        return res.status(500).send({
+            message: "Error retrieving Covid Incident with id=" + id
+        });
+    }
+    res.send(`No data available for the given id = ${id}`);
+};
+
+/**
+ * @swagger
+ * /covid-incidents:
+ *  put:
+ *    description: Use to update covid incident
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
+const remove = async (req, res) => {
+    const id = req.params.id;
+    let success = `Succesfully deleted the record with id ${id}`;
+    let fail = `Couldn't find the record with id ${id}`;
+    try {
+        let status = await CovidIncident.update({ active_record: false }, {
+            where: {
+                id: id,
+                active_record: true
+            }
+        });
+        return status == 1 ? res.status(200).send({ message: success }) : res.status(200).send({ message: fail });
+    } catch (error) {
+        return res.status(500).send({
+            message: "Error retrieving Covid Incidents..."
+        });
+    }
 
 };
 
-module.exports = { create, findAll, findOne, update }
+function getCovidIncident(req) {
+    return {
+        date: req.body.date,
+        location: req.body.location,
+        address: req.body.address,
+        city: req.body.city,
+        discription: req.body.discription,
+        covid_district: req.body.covid_district
+    };
+}
+
+module.exports = { create, findAll, findOne, update, remove }
+
+
