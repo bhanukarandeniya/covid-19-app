@@ -1,7 +1,7 @@
 const express = require('express');
 const config = require('config').get('app');
 const corsConfig = require('config').get('CORS');
-const router = require('./src/route/route');
+const router = require('./src/route/index');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -30,9 +30,9 @@ app.use(morgan('combined'));
 // enable HTTP header protection
 app.use(helmet())
 
-app.use("", router);
+app.use('/', router);
 
-db.sequelize.sync().then(result => {
+db.sequelize.sync().then(() => {
     // console.log(result);
 }).catch(err => {
     console.log(err);

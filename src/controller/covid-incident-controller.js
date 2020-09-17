@@ -10,14 +10,7 @@ const { CovidIncident } = require("../model/index");
  *        description: A successful response
  */
 const create = async (req, res) => {
-    const covid_incident = {
-        date: req.body.date,
-        location: req.body.location,
-        address: req.body.address,
-        city: req.body.city,
-        discription: req.body.discription,
-        covid_district: req.body.covid_district
-    }
+    const covid_incident = getCovidIncident(req.body);
     try {
         let data = await CovidIncident.create(covid_incident);
         if (data) {
@@ -71,7 +64,7 @@ const findOne = async (req, res) => {
     try {
         let data = await CovidIncident.findByPk(id);
         if (data != null && data != undefined) {
-            return res.send(data);
+            return res.status(200).send(data);
         }
     } catch (error) {
         return res.status(500).send({
@@ -92,13 +85,13 @@ const findOne = async (req, res) => {
  */
 const update = async (req, res) => {
     const id = req.body.id;
-    const covid_incident = getCovidIncident(req)
+    const covid_incident = getCovidIncident(req.body)
     try {
         let data = await CovidIncident.update(covid_incident, {
             where: { id: id }
         });
         if (data) {
-            return res.send(data);
+            return res.status(200).send(data);
         }
     } catch (error) {
         return res.status(500).send({
@@ -106,6 +99,7 @@ const update = async (req, res) => {
         });
     }
     res.send(`No data available for the given id = ${id}`);
+
 };
 
 /**
@@ -137,14 +131,14 @@ const remove = async (req, res) => {
 
 };
 
-function getCovidIncident(req) {
+function getCovidIncident(reqBody) {
     return {
-        date: req.body.date,
-        location: req.body.location,
-        address: req.body.address,
-        city: req.body.city,
-        discription: req.body.discription,
-        covid_district: req.body.covid_district
+        date: reqBody.date,
+        location: reqBody.location,
+        address: reqBody.address,
+        city: reqBody.city,
+        discription: reqBody.discription,
+        covid_district: reqBody.covid_district
     };
 }
 
