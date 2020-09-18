@@ -1,4 +1,4 @@
-const { CovidIncident } = require("../model/index");
+const { CovidIncident, District } = require("../model/index");
 
 /**
  * @swagger
@@ -40,7 +40,8 @@ const findAll = async (req, res) => {
         let data = await CovidIncident.findAll({
             limit: limit,
             offset: offset,
-            where: { active_record: true }
+            where: { active_record: true },
+            include: [District]         //Left outer join
         });
         return res.status(200).send(data);
     } catch (error) {

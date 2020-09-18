@@ -33,7 +33,7 @@ app.use(helmet())
 app.use('/', router);
 
 db.sequelize.sync().then(() => {
-    // console.log(result);
+    console.log('DB Connection established successfully...');
 }).catch(err => {
     console.log(err);
 });

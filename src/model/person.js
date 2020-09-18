@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         maritial_status: { type: DataTypes.BOOLEAN, allowNull: false },
         spouse: { type: DataTypes.STRING, allowNull: false },
         occupation: { type: DataTypes.STRING },
-        infection_status: { type: DataTypes.STRING, allowNull: false },
+        infection_status: { type: DataTypes.ENUM, values: ['POSITIVE', 'NEGATIVE', 'PENDING'], allowNull: false },
         description: { type: DataTypes.TEXT, allowNull: false },
         active_record: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
     }, {

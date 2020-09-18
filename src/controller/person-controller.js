@@ -1,4 +1,4 @@
-const { Person } = require("../model/index");
+const { Person, District } = require("../model");
 
 
 const create = async (req, res) => {
@@ -61,7 +61,8 @@ const findAll = async (req, res) => {
         let data = await Person.findAll({
             limit: limit,
             offset: offset,
-            where: { active_record: true }
+            where: { active_record: true },
+            include: [District]
         });
         return res.status(200).send(data);
     } catch (error) {
