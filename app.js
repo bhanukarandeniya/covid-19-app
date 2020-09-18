@@ -7,13 +7,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const db = require("./src/model/index");
 const morgan = require('morgan')
-const { swaggerUi, swaggerDocs } = require('./src/config/swagger-config');
 
 
 var app = express();
-
-//enable swagger UI docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // enable cors
 app.use(cors(corsConfig.origin));
@@ -25,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // enable request logging
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 // enable HTTP header protection
 app.use(helmet())

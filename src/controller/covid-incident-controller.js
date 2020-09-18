@@ -8,10 +8,7 @@ const properties = propertiesReader('./config/messages.en', 'utf-8');
  * @swagger
  * /covid-incidents:
  *  post:
- *    description: Use to create covid incident
- *    responses:
- *      '200':
- *        description: A successful response
+ *    description: Use to create a Covid incident
  */
 const create = async (req, res) => {
     validate(req, res);
@@ -32,10 +29,7 @@ const create = async (req, res) => {
  * @swagger
  * /all-covid-incidents:
  *  get:
- *    description: Use to request all covid incidents
- *    responses:
- *      '200':
- *        description: A successful response
+ *    description: Use to request all Covid incidents
  */
 const findAll = async (req, res) => {
     validate(req, res);
@@ -61,10 +55,7 @@ const findAll = async (req, res) => {
  * @swagger
  * /covid-incidents:
  *  get:
- *    description: Use to request one covid incident
- *    responses:
- *      '200':
- *        description: A successful response
+ *    description: Use to retrive a Covid incident
  */
 const findOne = async (req, res) => {
     validate(req, res);
@@ -86,10 +77,7 @@ const findOne = async (req, res) => {
  * @swagger
  * /covid-incidents:
  *  put:
- *    description: Use to update covid incident
- *    responses:
- *      '200':
- *        description: A successful response
+ *    description: Use to remove Covid incident
  */
 const update = async (req, res) => {
     validate(req, res);
@@ -110,14 +98,12 @@ const update = async (req, res) => {
     res.status(200).send(properties.get('database.info.id-not-found') + ' ' + id);
 };
 
+
 /**
  * @swagger
  * /covid-incidents:
- *  put:
- *    description: Use to update covid incident
- *    responses:
- *      '200':
- *        description: A successful response
+ *  delete:
+ *    description: Use to remove Covid incident
  */
 const remove = async (req, res) => {
     validate(req, res);

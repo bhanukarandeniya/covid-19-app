@@ -4,6 +4,12 @@ const propertiesReader = require('properties-reader');
 const properties = propertiesReader('./config/messages.en', 'utf-8');
 
 
+/**
+ * @swagger
+ * /person:
+ *  post:
+ *    description: Use to create a person
+ */
 const create = async (req, res) => {
     validate(req, res);
     const person = getPerson(req.body)
@@ -21,6 +27,12 @@ const create = async (req, res) => {
 }
 
 
+/**
+ * @swagger
+ * /person:
+ *  put:
+ *    description: Use to update a person
+ */
 const update = async (req, res) => {
     validate(req, res);
     const id = req.body.id;
@@ -41,6 +53,12 @@ const update = async (req, res) => {
 }
 
 
+/**
+ * @swagger
+ * /person:
+ *  get:
+ *    description: Use to retrive a person
+ */
 const findOne = async (req, res) => {
     validate(req, res);
     const id = req.params.id;
@@ -58,7 +76,12 @@ const findOne = async (req, res) => {
 }
 
 
-
+/**
+ * @swagger
+ * /person:
+ *  get:
+ *    description: Use to retrive all person
+ */
 const findAll = async (req, res) => {
     validate(req, res);
     const page = req.query.page;
@@ -79,6 +102,12 @@ const findAll = async (req, res) => {
     }
 }
 
+/**
+ * @swagger
+ * /person:
+ *  delete:
+ *    description: Use to retrive all person
+ */
 const remove = async (req, res) => {
     validate(req, res);
     const id = req.params.id;
