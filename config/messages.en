@@ -1,0 +1,6 @@
+[database]
+info.id-not-found = No record available for the given id =
+
+success.record-deleted = Succesfully deleted the record with id =
+
+error = Database error occurred during operation, your transaction failed...

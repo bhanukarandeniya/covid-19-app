@@ -1,4 +1,8 @@
 const { CovidIncident, District } = require("../model/index");
+const { validate } = require('../util/input-validator');
+const propertiesReader = require('properties-reader');
+const properties = propertiesReader('./config/messages.en', 'utf-8');
+
 
 /**
  * @swagger
@@ -10,7 +14,8 @@ const { CovidIncident, District } = require("../model/index");
  *        description: A successful response
  */
 const create = async (req, res) => {
-    const covid_incident = getCovidIncident(req.body);
+    validate(req, res);
+    const covid_incident = getCovidIncidentObj(req.body);
     try {
         let data = await CovidIncident.create(covid_incident);
         if (data) {
@@ -18,7 +23,7 @@ const create = async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send({
-            message: "Error saving covid incident..."
+            message: properties.get('database.error')
         });
     }
 }
@@ -33,6 +38,7 @@ const create = async (req, res) => {
  *        description: A successful response
  */
 const findAll = async (req, res) => {
+    validate(req, res);
     const page = req.query.page;
     const limit = parseInt(req.query.size);
     const offset = page * limit;
@@ -46,7 +52,7 @@ const findAll = async (req, res) => {
         return res.status(200).send(data);
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving Covid Incidents..."
+            message: properties.get('database.error')
         });
     }
 };
@@ -61,6 +67,7 @@ const findAll = async (req, res) => {
  *        description: A successful response
  */
 const findOne = async (req, res) => {
+    validate(req, res);
     const id = req.params.id;
     try {
         let data = await CovidIncident.findByPk(id);
@@ -69,10 +76,10 @@ const findOne = async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving Covid Incident with id=" + id
+            message: properties.get('database.error')
         });
     }
-    res.send(`No data available for the given id = ${id}`);
+    res.status(200).send(properties.get('database.info.id-not-found') + ' ' + id);
 }
 
 /**
@@ -85,8 +92,9 @@ const findOne = async (req, res) => {
  *        description: A successful response
  */
 const update = async (req, res) => {
+    validate(req, res);
     const id = req.body.id;
-    const covid_incident = getCovidIncident(req.body)
+    const covid_incident = getCovidIncidentObj(req.body)
     try {
         let data = await CovidIncident.update(covid_incident, {
             where: { id: id }
@@ -96,11 +104,10 @@ const update = async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving Covid Incident with id=" + id
+            message: properties.get('database.error')
         });
     }
-    res.send(`No data available for the given id = ${id}`);
-
+    res.status(200).send(properties.get('database.info.id-not-found') + ' ' + id);
 };
 
 /**
@@ -113,9 +120,10 @@ const update = async (req, res) => {
  *        description: A successful response
  */
 const remove = async (req, res) => {
+    validate(req, res);
     const id = req.params.id;
-    let success = `Succesfully deleted the record with id ${id}`;
-    let fail = `Couldn't find the record with id ${id}`;
+    let success = properties.get('database.success.record-deleted') + ' ' + id;
+    let fail = properties.get('database.info.id-not-found') + ' ' + id;
     try {
         let status = await CovidIncident.update({ active_record: false }, {
             where: {
@@ -126,13 +134,14 @@ const remove = async (req, res) => {
         return status == 1 ? res.status(200).send({ message: success }) : res.status(200).send({ message: fail });
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving Covid Incidents..."
+            message: properties.get('database.error')
         });
     }
 
 };
 
-function getCovidIncident(reqBody) {
+
+const getCovidIncidentObj = (reqBody) => {
     return {
         date: reqBody.date,
         location: reqBody.location,
@@ -144,5 +153,3 @@ function getCovidIncident(reqBody) {
 }
 
 module.exports = { create, findAll, findOne, update, remove }
-
-

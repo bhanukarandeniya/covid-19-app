@@ -4,7 +4,7 @@
   "description": "Sample application to track covid 19",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "export NODE_ENV=default && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,9 +22,11 @@
     "config": "^3.3.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-validator": "^6.6.1",
     "helmet": "^4.1.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
+    "properties-reader": "^2.1.1",
     "sequelize": "^6.3.5",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4"

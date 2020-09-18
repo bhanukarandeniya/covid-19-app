@@ -1,7 +1,11 @@
-const { Person, District } = require("../model");
+const { Person, District } = require("../model/index");
+const { validate } = require('../util/input-validator');
+const propertiesReader = require('properties-reader');
+const properties = propertiesReader('./config/messages.en', 'utf-8');
 
 
 const create = async (req, res) => {
+    validate(req, res);
     const person = getPerson(req.body)
     try {
         let data = await Person.create(person);
@@ -10,7 +14,7 @@ const create = async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send({
-            message: "Error saving person..."
+            message: properties.get('database.error')
         });
     }
 
@@ -18,6 +22,7 @@ const create = async (req, res) => {
 
 
 const update = async (req, res) => {
+    validate(req, res);
     const id = req.body.id;
     const person = getPerson(req.body)
     try {
@@ -29,14 +34,15 @@ const update = async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving Covid Incident with id=" + id
+            message: properties.get('database.error')
         });
     }
-    res.send(`No data available for the given id = ${id}`);
+    res.status(200).send(properties.get('database.info.id-not-found') + ' ' + id);
 }
 
 
 const findOne = async (req, res) => {
+    validate(req, res);
     const id = req.params.id;
     try {
         let data = await Person.findByPk(id);
@@ -45,15 +51,16 @@ const findOne = async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving person with id=" + id
+            message: properties.get('database.error')
         });
     }
-    res.send(`No data available for the given id = ${id}`);
+    res.status(200).send(properties.get('database.info.id-not-found') + ' ' + id);
 }
 
 
 
 const findAll = async (req, res) => {
+    validate(req, res);
     const page = req.query.page;
     const limit = parseInt(req.query.size);
     const offset = page * limit;
@@ -67,15 +74,16 @@ const findAll = async (req, res) => {
         return res.status(200).send(data);
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving person..."
+            message: properties.get('database.error')
         });
     }
 }
 
 const remove = async (req, res) => {
+    validate(req, res);
     const id = req.params.id;
-    let success = `Succesfully deleted the record with id ${id}`;
-    let fail = `Couldn't find the record with id ${id}`;
+    let success = properties.get('database.success.record-deleted') + ' ' + id;
+    let fail = properties.get('database.info.id-not-found') + ' ' + id;
     try {
         let status = await CovidIncident.update({ active_record: false }, {
             where: {
@@ -86,7 +94,7 @@ const remove = async (req, res) => {
         return status == 1 ? res.status(200).send({ message: success }) : res.status(200).send({ message: fail });
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving person..."
+            message: properties.get('database.error')
         });
     }
 
@@ -109,7 +117,6 @@ function getPerson(reqBody) {
         person_district: reqBody.person_district
     };
 }
-
 
 module.exports = { create, update, findOne, findAll, remove }
 

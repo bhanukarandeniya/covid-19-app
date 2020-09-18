@@ -1,4 +1,6 @@
-const { District } = require("../model");
+const { District } = require("../model/index");
+const propertiesReader = require('properties-reader');
+const properties = propertiesReader('./config/messages.en', 'utf-8');
 
 const findAll = async (req, res) => {
     try {
@@ -6,7 +8,7 @@ const findAll = async (req, res) => {
         return res.status(200).send(data);
     } catch (error) {
         return res.status(500).send({
-            message: "Error retrieving Covid Incidents..."
+            message: properties.get('database.error')
         });
     }
 };
