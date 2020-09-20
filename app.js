@@ -1,5 +1,6 @@
 const express = require('express');
-require('dotenv').config();
+const config = require('config').get('app');
+const corsConfig = require('config').get('CORS');
 const router = require('./src/route/index');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -11,7 +12,7 @@ const morgan = require('morgan')
 var app = express();
 
 // enable cors
-app.use(cors(process.env.CORS_ORIGIN));
+app.use(cors(corsConfig.origin));
 
 // enable requests of content-type - application/json
 app.use(bodyParser.json());
@@ -33,8 +34,8 @@ db.sequelize.sync().then(() => {
     console.log(err);
 });
 
-app.listen(process.env.APP_PORT, () => {
-    console.log('Sample app listening on port ' + process.env.APP_PORT + ' !');
+app.listen(config.port, () => {
+    console.log('Sample app listening on port 9000!');
 });
 
 

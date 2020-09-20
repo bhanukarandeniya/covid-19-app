@@ -1,14 +1,15 @@
 const Sequelize = require('sequelize');
+const dbConfig = require('config').get('DB');
 
-const sequelize = new Sequelize(process.env.DB_SCHEMA, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+    host: dbConfig.HOST,
+    dialect: dbConfig.dialect,
     operatorsAliases: false,
     pool: {
-        max: parseInt(process.env.DB_POOL_MAX),
-        min: parseInt(process.env.DB_POOL_MIN),
-        acquire: process.env.DB_POOL_ACQUIRE,
-        idle: process.env.DB_POOL_IDLE
+        max: dbConfig.pool.max,
+        min: dbConfig.pool.min,
+        acquire: dbConfig.pool.acquire,
+        idle: dbConfig.pool.idle
     },
     define: {
         freezeTableName: true
