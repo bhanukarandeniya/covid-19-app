@@ -1,3 +1,5 @@
+const env = require('custom-env').env()
+
 const APP = {
     port: process.env.APP_PORT,
     cors_origin: "http://localhost:8081"

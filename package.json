@@ -4,7 +4,7 @@
   "description": "Sample application to track covid 19",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config app.js",
+    "start": "export NODE_ENV=development && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "custom-env": "^2.0.1",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "helmet": "^4.1.1",

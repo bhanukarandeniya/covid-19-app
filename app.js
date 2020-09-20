@@ -34,7 +34,7 @@ db.sequelize.sync().then(() => {
 });
 
 app.listen(APP.port, () => {
-    console.log('Sample app listening on port 9000!');
+    console.log('Sample app listening on port ' + APP.port + ' !');
 });
 
 
