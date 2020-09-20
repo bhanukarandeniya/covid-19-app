@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
-const dbConfig = require('config').get('DB');
+const { DB } = require('../../config/config');
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
-    dialect: dbConfig.dialect,
+const sequelize = new Sequelize(DB.schema, DB.user, DB.password, {
+    host: DB.host,
+    dialect: DB.dialect,
     operatorsAliases: false,
     pool: {
-        max: dbConfig.pool.max,
-        min: dbConfig.pool.min,
-        acquire: dbConfig.pool.acquire,
-        idle: dbConfig.pool.idle
+        max: DB.pool.max,
+        min: DB.pool.min,
+        acquire: DB.pool.acquire,
+        idle: DB.pool.idle
     },
     define: {
         freezeTableName: true

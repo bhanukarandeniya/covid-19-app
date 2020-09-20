@@ -1,6 +1,6 @@
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const config = require('config');
+const {APP} = require('../../config/config');
 
 const swaggerOptions = {
     covid_incident: {
@@ -12,7 +12,7 @@ const swaggerOptions = {
                 contact: {
                     name: "Amazing Developer"
                 },
-                servers: [`localhost:${config.port}`]
+                servers: [`localhost:${APP.port}`]
             }
         },
         apis: ["./src/controller/covid-incident-controller.js"]
@@ -26,7 +26,7 @@ const swaggerOptions = {
                 contact: {
                     name: "Amazing Developer"
                 },
-                servers: [`localhost:${config.port}`]
+                servers: [`localhost:${APP.port}`]
             }
         },
         apis: ["./src/controller/person-controller.js"]
