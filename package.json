@@ -4,7 +4,7 @@
   "description": "Sample application to track covid 19",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=default && node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +19,8 @@
   "homepage": "https://github.com/bhanukarandeniya/covid-19-app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "config": "^3.3.1",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "helmet": "^4.1.1",
