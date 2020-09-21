@@ -19,6 +19,8 @@ module.exports = (sequelize) => {
         occupation: { type: DataTypes.STRING },
         infection_status: { type: DataTypes.ENUM, values: ['POSITIVE', 'NEGATIVE', 'PENDING'], allowNull: false },
         description: { type: DataTypes.TEXT, allowNull: false },
+        gender: { type: DataTypes.BOOLEAN, allowNull: false },
+        incident_id: { type: DataTypes.INTEGER, allowNull: false },
         active_record: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
     }, {
         sequelize,

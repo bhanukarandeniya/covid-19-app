@@ -143,7 +143,9 @@ function getPerson(reqBody) {
         occupation: reqBody.occupation,
         infection_status: reqBody.infection_status,
         description: reqBody.description,
-        person_district: reqBody.person_district
+        person_district: reqBody.person_district,
+        gender: reqBody.gender,
+        incident_id: reqBody.incident_id
     };
 }
 

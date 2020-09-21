@@ -38,6 +38,16 @@ db.District.hasMany(db.CovidIncident, {
 db.CovidIncident.belongsTo(db.District, {
     foreignKey: 'covid_district',
     allowNull: false
-})
+});
+
+db.CovidIncident.hasMany(db.Person, {
+    foreignKey: 'incident_id',
+    allowNull: false
+});
+
+db.Person.belongsTo(db.CovidIncident, {
+    foreignKey: 'incident_id',
+    allowNull: false
+});
 
 module.exports = db
