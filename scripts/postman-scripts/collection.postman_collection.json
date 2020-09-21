@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "a8c756a5-48bb-457e-99fd-9b606449e3ca",
+		"name": "collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9000/districts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9000/districts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"districts"
+					]
+				},
+				"description": "Retrive all districts"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/covid-incidents/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/covid-incidents/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"covid-incidents",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/covid-incidents",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"date\": \"2020-09-18T23:10:10.000Z\",\n        \"location\": \"Colombo City Center\",\n        \"address\": \"Colombo City Center, Colombo 02\",\n        \"city\": \"Colombo\",\n        \"discription\": \"Subject has gone to movie theater\",\n        \"createdAt\": \"2020-09-18T18:33:33.000Z\",\n        \"updatedAt\": \"2020-09-18T18:33:33.000Z\",\n        \"covid_district\": 1\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/covid-incidents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"covid-incidents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/covid-incidents",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"id\": 1,\n        \"date\": \"2020-09-16T10:10:10.000Z\",\n        \"location\": \"Diyatha Uyana\",\n        \"address\": \"Diyatha Uyana, Battaramulla\",\n        \"city\": \"Battaramulla\",\n        \"discription\": \"Subject has come to a resturant with his family\",\n        \"covid_district\": 1\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/covid-incidents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"covid-incidents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/covid-incidents/all?page=0&size=10",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/covid-incidents/all?page=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"covid-incidents",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/person/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9000/person/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"person",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n       \"firstname\": \"Kumudu\",\n        \"lastname\": \"Weerasinghe\",\n        \"address1\": \"No. 762A Rajamal rd,\",\n        \"address2\": \"Thalawathugoda, Kottawa\",\n        \"nic\": \"941266034V\",\n        \"city\": \"Thalawathugoda\",\n        \"dob\": \"1994-09-16T10:10:10.000Z\",\n        \"maritial_status\": false,\n        \"spouse\": \"H A Weerasinghe\",\n        \"occupation\": \"None\",\n        \"infection_status\": \"POSITIVE\",\n        \"description\": \"Subject has been associated with few more covid suspicious subjects \",\n        \"createdAt\": \"2020-09-18T13:34:11.000Z\",\n        \"updatedAt\": \"2020-09-18T13:34:11.000Z\",\n        \"gender\":0,\n        \"person_district\": 1,\n        \"incident_id\": 1\n        \n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/person",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/person/all?page=0&size=100",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9000/person/all?page=0&size=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"person",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/person",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 2,\n        \"firstname\": \"Vimal\",\n        \"lastname\": \"Nanayakkara\",\n        \"address1\": \"No 56/A, Rathana Rd, Edited !!\",\n        \"address2\": \"Janajaya scheme, Rajagiriya\",\n        \"nic\": \"661266034V\",\n        \"city\": \"Rajagiriya\",\n        \"dob\": \"1966-09-16T10:10:10.000Z\",\n        \"maritial_status\": true,\n        \"spouse\": \"R M Nanayakkara\",\n        \"occupation\": \"Engineer\",\n        \"infection_status\": \"POSITIVE\",\n        \"description\": \"Subject has been associated with few more covid suspicious subjects \",\n        \"active_record\": true,\n        \"createdAt\": \"2020-09-17T21:43:10.000Z\",\n        \"updatedAt\": \"2020-09-17T21:43:10.000Z\",\n        \"person_district\": 1\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/person",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/districts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9000/districts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"districts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9000/test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9000/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
