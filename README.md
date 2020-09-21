@@ -1,2 +1,2 @@
-# covid-19-app
+# covid-tracking-app
 Covid tracking sample application
