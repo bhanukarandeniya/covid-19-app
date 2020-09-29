@@ -32,7 +32,7 @@ const create = async (req, res) => {
     try {
         let data = await District.create(district);
         if (data) {
-            //Flush DB if new record inserted
+            //Flush Cache if new record inserted
             client.flushall();
             return res.status(200).send(data.dataValues);
         }
