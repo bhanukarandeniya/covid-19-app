@@ -13,4 +13,24 @@ const findAll = async (req, res) => {
     }
 };
 
-module.exports = { findAll }
+
+const create = async (req, res) => {
+    const district = getDistrict(req.body)
+    try {
+        let data = await District.create(district);
+        if (data) {
+            return res.status(200).send(data.dataValues);
+        }
+    } catch (error) {
+        return res.status(500).send({
+            message: properties.get('database.error')
+        });
+    }
+
+}
+
+const getDistrict = (reqBody) => {
+    return { name: reqBody.name, code: parseInt(reqBody.code) };
+}
+
+module.exports = { findAll, create }
