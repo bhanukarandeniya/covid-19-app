@@ -10,3 +10,8 @@ Without docker
     -  Set the node env in the start script(in package.jason) as development or prod
     -  Execute "npm start"
     -  Import postman scripts and test 
+
+
+Redis Server setup
+    - Use the following link for Ubuntu, to setup the Redis cache locally
+      https://tecadmin.net/install-redis-ubuntu/

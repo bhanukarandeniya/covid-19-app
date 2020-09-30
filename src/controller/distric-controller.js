@@ -15,7 +15,8 @@ const findAll = async (req, res) => {
         try {
             console.log('Hitting the DB Server...');
             let data = await District.findAll();
-            client.setex("*", 1000, JSON.stringify(data));
+            //Push db records to Redis cache with key *
+            client.set("*", 1000, JSON.stringify(data));
             return res.status(200).send(data);
         } catch (error) {
             console.error(error);
