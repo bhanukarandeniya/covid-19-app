@@ -15,3 +15,13 @@ Without docker
 Redis Server setup
     - Use the following link for Ubuntu, to setup the Redis cache locally
       https://tecadmin.net/install-redis-ubuntu/
+
+
+
+############################################################################################
+
+With docker compose
+
+Run the docker compose file.
+
+docker-compose -f docker-compose.yml up --build

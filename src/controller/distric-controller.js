@@ -2,9 +2,13 @@ const { District } = require('../model/index')
 const propertiesReader = require('properties-reader')
 const properties = propertiesReader('./config/messages.en', 'utf-8')
 const redis = require('redis')
+const { CACHE } = require('../../config/config')
 
 // Redis cache implementation
-const client = redis.createClient(6379)
+const client = redis.createClient({
+  port: CACHE.port,
+  host: CACHE.host
+})
 
 const findAll = async (req, res) => {
   client.get('*', async (err, cache) => {

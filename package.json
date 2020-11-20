@@ -4,7 +4,7 @@
   "description": "Sample application to track covid 19",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=development && node app.js",
+    "start": "export NODE_ENV=prod && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
