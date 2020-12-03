@@ -1,12 +1,19 @@
 const faker = require('faker')
-const { CovidIncident, Person } = require('../model')
-const maxCovidIncidentRecords = 20
-const maxPersonRecords = 20
+const { DB } = require('../../config/config')
+const { CovidIncident, Person, District } = require('../model')
+
+const maxCovidIncidentRecords = DB.max_covid_incident_records
+const maxPersonRecords = DB.max_person_records
 const dates = getSortedDates()
 const incidentDescriptions = getIncidentDescriptions()
 const personDescriptions = getPersonDescriptions()
 
 const fetchData = async () => {
+  for (let i = 0; i < getDistricts().length; i++) {
+    const district = await getDistrict(i)
+    await District.create(district)
+  }
+
   for (let i = 0; i < maxCovidIncidentRecords; i++) {
     const covidIncident = await getCovidIncidentData(i)
     const incident = await CovidIncident.create(covidIncident)
@@ -17,6 +24,13 @@ const fetchData = async () => {
       console.log('Generating and fetching data to the database...')
     }
   }
+}
+
+async function getDistrict (index) {
+  const district = {}
+  district.name = getDistricts()[index]
+  district.code = faker.fake('{{address.zipCode}}')
+  return district
 }
 
 async function getPersonData (covidIncidentId) {
@@ -37,6 +51,7 @@ async function getPersonData (covidIncidentId) {
   person.gender = Math.random() < 0.5
   person.contact_no = faker.fake('{{phone.phoneNumber}}')
   person.incident_id = covidIncidentId
+  person.person_district = findIndex(1, (getDistricts().length + 1))
   return person
 }
 
@@ -49,6 +64,7 @@ async function getCovidIncidentData (dateIndex) {
   covidIncident.city = city
   const index = findIndex(0, incidentDescriptions.length)
   covidIncident.description = incidentDescriptions[index]
+  covidIncident.covid_district = findIndex(1, (getDistricts().length + 1))
   return covidIncident
 }
 
@@ -60,7 +76,6 @@ function getSortedDates () {
   const sortedDates = dates.sort(function (a, b) {
     return new Date(a) - new Date(b)
   })
-  console.log(sortedDates)
   return sortedDates
 }
 
@@ -83,6 +98,13 @@ function getInfectionStatus () {
   const values = ['POSITIVE', 'NEGATIVE', 'PENDING']
   const index = findIndex(0, values.length)
   return values[index]
+}
+
+function getDistricts () {
+  const districts = ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu', 'Vavuniya', 'Puttalam', 'Kurunegala', 'Gampaha', 'Colombo', 'Kalutara',
+    'Anuradhapura', 'Polonnaruwa', 'Matale', 'Kandy', 'Nuwara Eliya', 'Kegalle', 'Ratnapura', 'Trincomalee', 'Batticaloa', 'Ampara', 'Badulla',
+    'Monaragala', 'Hambantota', 'Matara', 'Galle']
+  return districts
 }
 
 module.exports = { fetchData }

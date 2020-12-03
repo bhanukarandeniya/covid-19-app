@@ -139,6 +139,7 @@ function getPerson (reqBody) {
     description: reqBody.description,
     person_district: reqBody.person_district,
     gender: reqBody.gender,
+    contact_no:reqBody.contact_no,
     incident_id: reqBody.incident_id
   }
 }

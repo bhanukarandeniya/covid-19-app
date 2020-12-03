@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       autoIncrement: true
     },
     name: { type: DataTypes.STRING, allowNull: false },
-    code: { type: DataTypes.SMALLINT, allowNull: false }
+    code: { type: DataTypes.STRING(30), allowNull: false }
   }, {
     sequelize,
     modelName: 'district'
