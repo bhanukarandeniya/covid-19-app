@@ -6,6 +6,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const db = require('./src/model/index')
 const morgan = require('morgan')
+const { fetchData } = require('./src/config/fetch-data')
 
 var app = express()
 
@@ -28,6 +29,7 @@ app.use('/', router)
 
 db.sequelize.sync().then(() => {
   console.log('DB Connection established successfully...')
+  fetchData()
 }).catch(err => {
   console.log(err)
 })

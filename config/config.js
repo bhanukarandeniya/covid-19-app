@@ -17,7 +17,9 @@ const DB = {
     min: parseInt(process.env.DB_POOL_MIN),
     acquire: process.env.DB_POOL_ACQUIRE,
     idle: process.env.DB_POOL_IDLE
-  }
+  },
+  max_covid_incident_records: process.env.COVID_RECORDS,
+  max_person_records: process.env.PERSON_RECORDS
 }
 
 const CACHE = {

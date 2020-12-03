@@ -37,6 +37,8 @@ services:
       CORS_ORIGIN: http://localhost:8081
       CACHE_HOST: redis
       CACHE_PORT: 6379
+      COVID_RECORDS: 100
+      PERSON_RECORDS: 50   
     depends_on:
       - db
       - redis

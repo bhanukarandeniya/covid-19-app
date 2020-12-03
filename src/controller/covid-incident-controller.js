@@ -129,7 +129,7 @@ const getCovidIncidentObj = (reqBody) => {
     location: reqBody.location,
     address: reqBody.address,
     city: reqBody.city,
-    discription: reqBody.discription,
+    description: reqBody.description,
     covid_district: reqBody.covid_district
   }
 }
