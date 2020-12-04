@@ -31,3 +31,8 @@ You can set the Covid Incident records (COVID_RECORDS) and max person records pe
 as environment variables
 It would take considerable amount of time to get mysql container up and running properly,
 till then application will keep restarting, so bear with..
+Else use a new ternimal and stop the app with following command,
+docker container stop covid-tracking-app
+Once mysql container is properly initialized and started use follwing 
+command to start the application,
+docker container start covid-tracking-app
