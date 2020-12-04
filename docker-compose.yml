@@ -21,8 +21,8 @@ services:
     #   - "6379:6379"
 
   bhanuka-app:
-    image: covid-tracking-app
     restart: on-failure
+    container_name: covid-tracking-app
     build:
       context: .
     environment:

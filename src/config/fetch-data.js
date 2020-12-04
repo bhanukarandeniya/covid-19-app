@@ -9,8 +9,8 @@ const incidentDescriptions = getIncidentDescriptions()
 const personDescriptions = getPersonDescriptions()
 
 const fetchData = async () => {
-  fetchDistricts()
-  fetchCovidIncidents()
+  await fetchDistricts()
+  await fetchCovidIncidents()
 }
 
 async function fetchDistricts () {
