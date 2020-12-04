@@ -11,7 +11,7 @@ RUN npm install
 #Bundle app
 COPY . /usr/src/app
 
-EXPOSE 9000
+#EXPOSE 9000
 
 CMD ["node","app.js"]
 

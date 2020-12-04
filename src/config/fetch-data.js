@@ -9,19 +9,38 @@ const incidentDescriptions = getIncidentDescriptions()
 const personDescriptions = getPersonDescriptions()
 
 const fetchData = async () => {
-  for (let i = 0; i < getDistricts().length; i++) {
-    const district = await getDistrict(i)
-    await District.create(district)
-  }
+  fetchDistricts()
+  fetchCovidIncidents()
+}
 
-  for (let i = 0; i < maxCovidIncidentRecords; i++) {
-    const covidIncident = await getCovidIncidentData(i)
-    const incident = await CovidIncident.create(covidIncident)
-    const count = findIndex(Math.round((maxPersonRecords / 2)), maxPersonRecords)
-    for (let y = 0; y < count; y++) {
-      const person = await getPersonData(incident.dataValues.id)
-      await Person.create(person)
-      console.log('Generating and fetching data to the database...')
+async function fetchDistricts () {
+  const data = await District.findAll({
+    limit: 1
+  })
+  if (data.length <= 0) {
+    console.log('Generating and fetching data to the database...')
+    for (let i = 0; i < getDistricts().length; i++) {
+      const district = await getDistrict(i)
+      await District.create(district)
+    }
+  }
+}
+
+async function fetchCovidIncidents () {
+  const data = await CovidIncident.findAll({
+    limit: 1,
+    where: { active_record: true }
+  })
+  if (data.length <= 0) {
+    console.log('Generating and fetching data to the database...')
+    for (let i = 0; i < maxCovidIncidentRecords; i++) {
+      const covidIncident = await getCovidIncidentData(i)
+      const incident = await CovidIncident.create(covidIncident)
+      const count = findIndex(Math.round((maxPersonRecords / 2)), maxPersonRecords)
+      for (let y = 0; y < count; y++) {
+        const person = await getPersonData(incident.dataValues.id)
+        await Person.create(person)
+      }
     }
   }
 }

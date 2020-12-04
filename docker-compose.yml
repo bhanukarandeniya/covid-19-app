@@ -3,7 +3,7 @@ services:
   db:
     container_name: mysql-container
     image: mysql
-    restart: "no"
+    restart: on-failure
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
@@ -16,11 +16,13 @@ services:
   redis:
      container_name: redis-container
      image: "redis:alpine"
-     restart: "no"
+     restart: unless-stopped
     #  ports:
     #   - "6379:6379"
 
   bhanuka-app:
+    image: covid-tracking-app
+    restart: on-failure
     build:
       context: .
     environment:
@@ -37,13 +39,16 @@ services:
       CORS_ORIGIN: http://localhost:8081
       CACHE_HOST: redis
       CACHE_PORT: 6379
-      COVID_RECORDS: 100
-      PERSON_RECORDS: 50   
+      COVID_RECORDS: 40
+      PERSON_RECORDS: 40   
     depends_on:
       - db
       - redis
     ports:
       - "9000:9000"
+    volumes:
+      - /usr/src/app/node_modules
+      - ./src:/usr/src/app/src
    # network_mode: "host"
 
 volumes:

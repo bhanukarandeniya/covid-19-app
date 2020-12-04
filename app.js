@@ -32,6 +32,7 @@ db.sequelize.sync().then(() => {
   fetchData()
 }).catch(err => {
   console.log(err)
+  process.exit(1)
 })
 
 app.listen(APP.port, () => {
