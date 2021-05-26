@@ -1,7 +1,6 @@
 const express = require('express')
 const { APP } = require('./config/config')
 const router = require('./src/route/index')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const helmet = require('helmet')
 const db = require('./src/model/index')
@@ -14,10 +13,10 @@ var app = express()
 app.use(cors(APP.cors_origin))
 
 // enable requests of content-type - application/json
-app.use(bodyParser.json())
+app.use(express.json())
 
 // enable requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 
 // enable request logging
 app.use(morgan('dev'))
